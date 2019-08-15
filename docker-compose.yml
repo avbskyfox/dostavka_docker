@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+  nginx:
+    restart: always
+    image: nginx:latest
+    expose:
+      - 8080
+    ports:
+      - 80:8080
+    volumes:
+      - ./run:/www/dostavka_info/run
+      - ./projects/dostavka_info/static:/www/dostavka_info/static
+      - ./logs:/www/dostavka_info/logs
+      - ./docker/nginx:/etc/nginx/conf.d
+    depends_on:
+      - dostavka
+  dostavka:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./docker/dostavka_info/Dockerfile
+    volumes:
+      - ./run:/www/dostavka_info/run
+    expose:
+      - 8000
+    ports:
+      - 8000:8000
+    command: gunicorn -c gunicorn.py --bind=unix:/www/dostavka_info/run/gunicorn.sock dostavka_info.wsgi
+    depends_on:
+      - msd
+  msd:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./docker/msd/Dockerfile
+    volumes:
+      - ./logs:/www/msd/logs
+    expose:
+      - 40100
+    ports:
+      - 40100:40100
+    command: python msd.py
+    depends_on:
+      - redis
+  redis:
+    restart: always
+    image: redis:latest
+    expose:
+      - 6379
+    ports:
+      - 6379:6379

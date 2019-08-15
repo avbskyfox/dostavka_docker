@@ -1,0 +1,6 @@
+[submodule "projects/dostavka_info"]
+	path = projects/dostavka_info
+	url = git@github.com:avbskyfox/dostavka_docker.git
+[submodule "projects/MetaSearchD"]
+	path = projects/MetaSearchD
+	url = git@github.com:avbskyfox/MetaSearchD.git
