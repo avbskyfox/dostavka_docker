@@ -1,6 +1,6 @@
 [submodule "projects/dostavka_info"]
 	path = projects/dostavka_info
-	url = https://github.com/avbskyfox/dostavka_docker.git
+	url = https://github.com/avbskyfox/dostavka_info.git
 [submodule "projects/MetaSearchD"]
 	path = projects/MetaSearchD
 	url = https://github.com/avbskyfox/MetaSearchD.git
