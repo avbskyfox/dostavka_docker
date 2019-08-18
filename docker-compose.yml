@@ -10,7 +10,7 @@ services:
       - 80:8080
     volumes:
       - ./run:/www/dostavka_info/run
-      - ./projects/dostavka_info/static:/www/dostavka_info/static
+      - ./projects/dostavka_info/documents/static:/www/dostavka_info/static
       - ./logs:/www/dostavka_info/logs
       - ./docker/nginx:/etc/nginx/conf.d
     depends_on:
